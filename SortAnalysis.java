@@ -16,8 +16,9 @@ public class SortAnalysis
     public static void main(String[] args)
     {
         Random rand = new Random();
+        long timer = System.currentTimeMillis();
         System.out.println("SORTING ALGORITHM TEST");
-        for(int n = 10000; n < 10000; n *= 2)
+        for(int n = 10000; n < 10000000; n *= 2)
         {
             int[] a = new int[n];
 
@@ -27,6 +28,12 @@ public class SortAnalysis
             }
             int[] b = a;
             int[] c = a;
+
+            if (System.currentTimeMillis() > timer * 10 * 60)
+            {
+                System.out.println("Too much time has passed.");
+                break;
+            }
             
             System.out.printf("Array of size %,d\n", n);
 
