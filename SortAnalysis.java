@@ -29,7 +29,7 @@ public class SortAnalysis
         System.out.println("SORTING ALGORITHM TEST");
         
         //for loop to create several different size of arrays to sort.
-        for(int n = 10000; n < 10000000; n *= 2)
+        for(int n = 10000; n < 100000000; n *= 2)
         {
             //New array of size n.
             int[] a = new int[n];
@@ -50,7 +50,7 @@ public class SortAnalysis
             if (System.currentTimeMillis() - timer > 5 * 60 * 1000)
             {
                 System.out.println("Too much time has passed.");
-                break;
+                //break;
             }
             
             //Print the size of the array.
@@ -81,34 +81,37 @@ public class SortAnalysis
         //For loop to run matrix multiplication on multiple sizes of matrices.
         for(int n = 2; n < 100000000; n *= 2)
         {
-            //Three two dimensional arrays are used to creat
+            //These two-dimensional arrays are used to implement the matrix 
+            //  multiplication.
             int[][] a = new int[n][n];
-            int[][] a1 = new int[n][n];
             int[][] b = new int[n][n];
-            int[][] b1 = new int[n][n];
             int[][] c = new int[n][n];
             
+            //For loop to populate the arrays with random values.
             for(int i = 0; i < n; i++)
             {
                 for(int j = 0; j < n; j++)
                 {
-                    a[i][j] = a1[i][j] = rand.nextInt(100);
-                    b[i][j] = b1[i][j] = rand.nextInt(100);
+                    
+                    a[i][j] = rand.nextInt(100);
+                    b[i][j] = rand.nextInt(100);
                 }
             }
 
+            //Check if the loop has run for more than 5 minutes.
             if (System.currentTimeMillis() - timer > 5 * 60 * 1000)
             {
                 System.out.println("Too much time has passed.");
                 break;
             }
             
+            //Print size of array.
             System.out.printf("%,d X %,d Matrix\n", n, n);
             
-            startTimer = System.currentTimeMillis();
-            Matrices.matrixMult(n, a, b, c);
-            endTimer = System.currentTimeMillis() - startTimer;
-            System.out.println("\tOriginal Matrix Mult took " + endTimer + " ms.");
+            startTimer = System.currentTimeMillis();                                //Start timer.
+            Matrices.matrixMult(n, a, b, c);                                        //Run algorithm.
+            endTimer = System.currentTimeMillis() - startTimer;                     //Get runtime by getting the difference of the current time and the Start time.
+            System.out.println("\tOriginal Matrix Mult took " + endTimer + " ms."); //Display runtime.
             
             startTimer = System.currentTimeMillis();
             Matrices.strassenMatrixMult(n, a, b, c);

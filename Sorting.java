@@ -3,10 +3,11 @@
  *   File:      Sorting.java
  *   Project:   #1
  *   Due:       Apr 26, 2018
- *   Course:    cs14103-w18
+ *   Course:    cs331-s18
  *
  *   Description:
- *              This
+ *              This program implements and analyzes sorting algorithms and matrix
+ *                  multiplication algorithms.
  */
 package sortanalysis;
 
@@ -93,42 +94,71 @@ public class Sorting
         }
     }
     
+    //This method is used to split the array into two different arrays by selecting
+    //  a pivot and placing the elements that are smaller than the pivot into 
+    //  the left side of the array and the larger balues at the right.
     public static int partition(int low, int high, int arr[])
     {
+        //Index that begins at the low which is passed in as an argument for each
+        //  partition.
         int i = low;
+        
+        //Value that will be compared and that will split the array.
         int pivot = arr[low];
+        
+        //For loop to visit all the values to figure out which side of the pivot
+        //  they belong.
         for(int j = low + 1; j < high; j++)
         {
+            //Compare the value to the pivot.
             if(arr[j] <= pivot)
             {
+                //Increment i to access the next larger than pivot value.
                 i++;
+                
+                //Swap the value at j with the value at i.
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
         }
+        //Place the pivot in between the two partitions of the array by swapping
+        //  it with the last value that is smaller than the pivot.
         int temp = arr[i];
         arr[i] = arr[low];
         arr[low] = temp;
+        
+        //Return the value of the pivot.
         return i + 1;
     }
     
+    //This method implents the quicksort algorithm.
     public static void quickSort(int low, int high, int[] arr)
     {
+        //Only perfom actions if the array is larger than 1.
         if(low < high)
         {
+            //find the pivot and rearrange the array by calling the partition method.
             int pivot = partition(low, high, arr);
+            
+            //Recursively quicksort the left and right portions of the array.
             quickSort(low, pivot - 1, arr);
             quickSort(pivot + 1, high, arr);
         }
     }
     
+    //This method implements the exchange sort algorithm.
     public static void exchangeSort(int[] arr)
     {
+        //Loop through all the values in the array.
         for(int i = 0; i < arr.length; i++)
         {
+            //Loop through all the values that follow the current index to find the
+            //  following smallest value.
             for(int j = i + 1; j < arr.length; j++)
             {
+                //If a value is smaller than the current value at i then swap
+                //  with that value.
                 if(arr[i] > arr[j])
                 {
                     int temp = arr[i];
