@@ -50,7 +50,7 @@ public class SortAnalysis
             if (System.currentTimeMillis() - timer > 5 * 60 * 1000)
             {
                 System.out.println("Too much time has passed.");
-                //break;
+                break;
             }
             
             //Print the size of the array.
